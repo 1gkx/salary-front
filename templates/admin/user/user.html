@@ -1,0 +1,70 @@
+{{ define "user" }}
+
+{{template "header" .}}
+{{template "navbar" .}}
+
+<div class="container text-center main mt-5">
+  <div class="row">
+    <div class="col-2">
+      {{ if not .isProfile }}
+      <div class="list-group">
+        <a href="/admin/settings" class="list-group-item text-center">
+          <i class="fas fa-cogs"></i><br />Настройки
+        </a>
+        <a href="/admin/users" class="list-group-item active text-center">
+          <i class="fas fa-users"></i><br />Пользователи
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    <div class="col-9">
+      <div class="profile">
+        <p class="h2 text-center my-5">{{ fullName .data.ID }}</p>
+        <form action="/admin/users" data-redirect="{{ .redirect }}" data-event="update" class="needs-validation"
+          novalidate="">
+          <input type="hidden" name="id" value="{{ .data.ID }}" />
+          <div class="form-group">
+            <label>Фамилия</label>
+            <input class="form-control" type="text" name="lastname" required placeholder="Фамилия"
+              value="{{ .data.LastName }}" />
+          </div>
+          <div class="form-group">
+            <label>Имя</label>
+            <input class="form-control" type="text" name="firstname" required placeholder="Имя"
+              value="{{ .data.FirstName }}" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" type="email" name="email" required placeholder="Введите ваш Email"
+              value="{{ .data.Email }}" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Телефон</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="phone" name="phone" placeholder="+7(___)___-__-__"
+                value="{{ .data.Phone }}" required="">
+              <div class="invalid-feedback w-100">Это поле обязательно!</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Новый пароль</label>
+            <input class="form-control" type="password" name="password" placeholder="Новый пароль"
+              {{ if .isNew }}required="" {{ end }} />
+          </div>
+          {{ if not .isProfile }}
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="admin" name="admin">
+            <label class="form-check-label" for="admin">Администрато системы</label>
+          </div>
+          {{ end }}
+          <button class="btn btn-primary btn-block"
+            type="submit">{{ if .isNew }}Сохранить{{ else }}Обновить{{end}}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{template "footer" .}}
+
+{{ end }}

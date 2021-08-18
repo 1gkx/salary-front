@@ -1,0 +1,135 @@
+{{ define "settings" }}
+
+{{template "header" .}}
+{{template "navbar" .}}
+
+<div class="container text-center main mt-5">
+  <div class="row">
+    <div class="col-2">
+      <div class="list-group">
+        <a href="/admin/settings" class="list-group-item active text-center">
+          <i class="fas fa-cogs"></i><br />Настройки
+        </a>
+        <a href="/admin/users" class="list-group-item text-center">
+          <i class="fas fa-users"></i><br />Пользователи
+        </a>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="container">
+        <h4 class="mb-3">Настройки</h4>
+        <form action="/admin/settings" class="needs-validation settings" novalidate="">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-outline-secondary active">
+              <input type="radio" name="database_driver" id="sqlite3" value="sqlite3" autocomplete="off"
+                {{if (eq .data.Database.Driver "sqlite3")}}checked{{end}}>
+              Sqlite3
+            </label>
+            <label class="btn btn-outline-secondary">
+              <input type="radio" name="database_driver" id="postgres" value="postgres" autocomplete="off"
+                {{if (eq .data.Database.Driver "postgres")}}checked{{end}}>
+              PostgreSQL
+            </label>
+            <label class="btn btn-outline-secondary">
+              <input type="radio" name="database_driver" id="mysql" value="mysql" autocomplete="off"
+                {{if (eq .data.Database.Driver "mysql")}}checked{{end}}>
+              MySQL
+            </label>
+          </div>
+
+          <fieldset class="database_path my-2 {{if not (eq .data.Database.Driver "sqlite3")}} d-none {{ end }}">
+            <label for="database_path">Путь к файлу базы данных</label>
+            <input type="text" class="form-control" id="database_path" name="database_path" placeholder="data/dbname.db"
+              value="{{ .data.Database.Path }}" required="">
+          </fieldset>
+
+          <fieldset class="database_server my-2 {{ if (eq .data.Database.Driver "sqlite3") }} d-noe {{ end }}">
+            <div class="row">
+              <div class="col-8">
+                <label for="database_server">Сервер</label>
+                <input type="text" class="form-control" name="database_server" id="database_server" placeholder="https://example.com"
+                  value="{{ .data.Database.Host }}" required="">
+                <div class="invalid-feedback">Это поле обязательно!</div>
+              </div>
+              <div class="col-4">
+                <label for="database_port">Порт</label>
+                <input type="text" class="form-control" name="database_port" id="database_port" placeholder="5432"
+                  value="{{ .data.Database.Port }}" required="">
+                <div class="invalid-feedback">Это поле обязательно!</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for="database_user">Логин</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                  </div>
+                  <input type="text" class="form-control" name="database_user" id="database_user" placeholder="admin"
+                    value="{{ .data.Database.User }}" required="">
+                  <div class="invalid-feedback" style="width: 100%;">Это поле обязательно!</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <label for="database_pass">Пароль</label>
+                <div class="input-group">
+                  <input type="password" class="form-control" name="database_pass" id="database_pass"
+                    placeholder="Пароль" required="">
+                  <div class="invalid-feedback" style="width: 100%;">Это поле обязательно!</div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <hr class="mb-4">
+  
+          <div class="form-group">
+            <label for="gateway">Адрес шлюза</label>
+            <div class="input-group">
+              <input type="text" class="form-control" name="gateway" id="gateway"
+                placeholder="http://example.com:8080" value="" required="{{ .data.Gateway }}">
+              <div class="invalid-feedback" style="width: 100%;">Это поле обязательно!</div>
+            </div>
+          </div>
+
+          <hr class="mb-4">
+
+          <div class="row">
+            <div class="col-6">
+              <label for="mailHost">Адрес почтового сервера</label>
+              <div class="input-group">
+                <input type="text" class="form-control" name="mail_host" id="mailHost" placeholder="http://example.com:25"
+                  value="{{ .data.Mail.Host }}" required="">
+                <div class="invalid-feedback w-100">Это поле обязательно!</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="mailPort">Пароль</label>
+              <div class="input-group">
+                <input type="text" class="form-control" name="mail_port" id="mailPort" placeholder="Пароль"
+                  value="Пароль" required="">
+                <div class="invalid-feedback w-100">Это поле обязательно!</div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="mb-4">
+
+          <div class="form-group">
+            <label for="time">Время очистки базы</label>
+            <div class="input-group">
+              <input type="time" class="form-control" name="time" id="time" value="" required="">
+              <div class="invalid-feedback w-100">Это поле обязательно!</div>
+            </div>
+          </div>
+          <hr class="mb-4">
+          <button class="btn btn-lg btn-primary float-right" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{template "footer" .}}
+
+{{ end }}

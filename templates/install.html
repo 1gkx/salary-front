@@ -1,0 +1,191 @@
+{{ define "install" }}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Install Application</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+  <link href="/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+   <div class="h-100 w-100 position-absolute d-flex align-items-center">
+    <main role=" main" class="container">
+
+      <form action="/" data-event="install" role="form" class="col-md-8 col-lg-6 offset-md-2 offset-lg-3 needs-validation" novalidate="">
+        <img class="mw-100" src="/img/logo.png">
+        <div class="alert alert-danger d-none" role="alert"></div>
+
+        <!-- Steps form -->
+
+        <!-- steps paggination-->
+        <div class="d-flex flex-row justify-content-around my-4 btn-group-sm setup-panel">
+          <a href="#step-1" type="button" class="btn btn-default btn-primary">1</a>
+          <a href="#step-2" type="button" class="btn btn-default" disabled="disabled">2</a>
+          <a href="#step-3" type="button" class="btn btn-default" disabled="disabled">3</a>
+          <a href="#step-4" type="button" class="btn btn-default" disabled="disabled">4</a>
+        </div>
+        <hr class="mb-3">
+        <!-- end steps paggination -->
+
+        <div class="steps">
+          <!-- Step 1-->
+          <!-- Сделать проверку доступности сервера-->
+           <div class="setup-content" id="step-1" style="display: none;">
+            <h3>Настройки шюза</h3>
+            <div class="form-group">
+              <label class="col-form-label">Адрес шлюза</label>
+              <input type="text" class="form-control" name="gateway" placeholder="http://localhost:8000">
+            </div>
+            <button class="btn btn-primary nextBtn float-right" type="button">Далее</button>
+          </div>
+          <!-- end step 1-->
+
+          <!-- Step 2-->
+          <div class="setup-content" id="step-2" style="display: none;">
+            <h3>База данных</h3>
+            <div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
+              <label class="btn btn-outline-secondary db-drivers active">
+                <input type="radio" name="database_driver" id="sqlite3" value="sqlite3" autocomplete="off">Sqlite3
+              </label>
+              <label class="btn btn-outline-secondary db-drivers">
+                <input type="radio" name="database_driver" id="postgres" value="postgres" autocomplete="off">PostgreSQL
+              </label>
+              <label class="btn btn-outline-secondary db-drivers">
+                <input type="radio" name="database_driver" id="mysql" value="mysql" autocomplete="off">MySQL
+              </label>
+            </div>
+
+            <div class="bd_path">
+              <div class="form-group">
+                <label class="col-form-label">Имя файловой базы</label>
+                <input type="text" class="form-control" name="database_path" placeholder="./databaseName.db">
+              </div>
+            </div>
+
+            <!-- Сделать проверку доступности сервера-->
+            <div class="bd_server" style="display: none;">
+              <div class="form-row">
+                <div class="col-8">
+                  <div class="form-group">
+                    <label class="col-form-label">Адрес</label>
+                    <input type="text" class="form-control"name="database_server" placeholder="Адрес">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label class="col-form-label">Порт</label>
+                    <input type="text" class="form-control" name="database_port" placeholder="Порт">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="col-form-label">Имя пользователя</label>
+                    <input type="text" class="form-control" name="database_username" placeholder="Имя пользователя">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label class="col-form-label">Пароль</label>
+                    <input type="text" class="form-control" name="database_password" placeholder="Пароль">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary backBtn float-left" type="button">Назад</button>
+            <button class="btn btn-primary nextBtn float-right" type="button">Далее</button>
+          </div>
+          <!-- end step 2-->
+
+          <!-- step 3-->
+          <!-- Сделать проверку доступности сервера-->
+          <div class="setup-content" id="step-3" style="display: none;">
+            <h3>Настройки почтового сервера</h3>
+            <div class="form-row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="col-form-label">Сервер</label>
+                  <input type="text" class="form-control" name="mail_server" placeholder="http://example.com">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="col-form-label">Порт</label>
+                  <input type="text" class="form-control" name="mail_port" placeholder="25">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="col-form-label">Имя пользователя</label>
+                  <input type="text" class="form-control" name="mail_username" placeholder="Имя пользователя">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="col-form-label">Пароль</label>
+                  <input type="password" class="form-control" name="mail_password" placeholder="Пароль">
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary backBtn float-left" type="button">Назад</button>
+            <button class="btn btn-primary nextBtn float-right" type="button">Далее</button>
+          </div>
+          <!-- end step 3-->
+
+          <!-- step 4-->
+          <div class="setup-content" id="step-4" style="display: none;">
+            <h3>Администратор</h3>
+            <div class="form-row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="col-form-label">Имя пользователя</label>
+                  <input type="email" class="form-control" name="admin_email" placeholder="Имя пользователя">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="col-form-label">Пароль</label>
+                  <input type="password" class="form-control" name="admin_password" placeholder="Пароль">
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary backBtn float-left" type="button">Назад</button>
+            <button class="btn btn-success float-right" type="submit">Сохранить</button>
+          </div>
+          <!-- end step 4-->
+        </div>
+
+        <!-- End step form-->
+      </form>
+
+    </main>
+
+
+    <footer class="fixed-bottom">
+      <div class="container text-center">
+        <p class="nav-link">© Примсоцбанк 2020-2020</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://unpkg.com/imask"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/main.js"></script>
+
+</body>
+
+</html>
+{{ end }}

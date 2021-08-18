@@ -1,0 +1,46 @@
+{{ define "login" }}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home page</title>
+
+  <link href="/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+  <div class="h-100 w-100 position-absolute d-flex align-items-center">
+    <main role=" main" class="container">
+      
+      <form action="/login" data-type="login" class="col-md-8 col-lg-4 offset-md-2 offset-lg-4 needs-validation login" novalidate="">
+        <img class="mb-4 mw-100" src="/img/logo.png">
+        <div class="alert alert-danger d-none" role="alert"></div>
+        <input type="email" class="form-control mb-2" placeholder="Email" name="email" required="" autofocus="">
+        <input type="password" class="form-control mb-4" placeholder="Пароль" name="password" required="">
+        <button class="btn btn-lg btn-primary btn-block" data-login type="submit">Войти</button>
+      </form>
+      <form action="/verify" data-verify="" class="col-md-8 col-lg-4 offset-md-2 offset-lg-4 needs-validation verify login d-none">
+        <img class="mb-4" src="/img/logo.png" alt="" height="50">
+        <div class="alert alert-danger d-none" role="alert"></div>
+        <input type="text" id="sms" class="form-control mb-2" placeholder="Код из смс" name="sms" required="" autofocus="">
+        <div id="countdown" class="text-center mb-4">
+          Повторная отправка через: <span class="minutes">00</span>:<span class="seconds">00</span>
+        </div>
+        <div id="sms-repeat" class="text-center mb-4 d-none">
+          <a href="" onclick="repeat_code()">Отправить смс повторно</a>
+      </div>
+        <button class="btn btn-lg btn-primary btn-block" data-login type="submit">Подтвердить</button>
+      </form>
+    </main>
+  </div>
+
+  {{template "footer" .}}
+
+</body>
+
+</html>
+{{ end }}

@@ -1,0 +1,30 @@
+{{ define "navbar" }}
+<nav class="navbar navbar-expand-md navbar-light">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="/img/logo.png" alt="Примсоцбанк" style="height: 40px;" />
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <img src="/img/account.png" style="width: 40px; height: 40px;" class="rounded-circle">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{ .user.FirstName }} {{ .user.LastName }}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/user">Профиль</a>
+            <a class="dropdown-item" href="/admin/settings">Настройки</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/logout">Выход</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{{ end }}
